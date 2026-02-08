@@ -10,7 +10,6 @@ import SwiftUI
 struct EquationView: View {
     var firstNumber: Int
     var secondNumber: Int
-    var result: Int
     
     var body: some View {
         HStack {
@@ -18,12 +17,12 @@ struct EquationView: View {
             Image(systemName: "multiply")
             Image(systemName: "\(secondNumber).circle")
             Image(systemName: "equal")
-            Text("\(result)")
+            Image(systemName: "questionmark.circle.dashed")
         }
         .font(.largeTitle.bold())
     }
 }
 
 #Preview {
-    EquationView(firstNumber: 2, secondNumber: 2, result: 4)
+    EquationView(firstNumber: 2, secondNumber: 2)
 }
