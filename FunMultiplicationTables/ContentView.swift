@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var timesOf = [Int]()
-    @State private var ranNumber = Int.random(in: 0...12)
-    @State private var numberOfQuestions = [Int]()
+    @State private var firstNumber = 1
+    @State private var secondNumber = Int.random(in: 1...12)
+    @State private var numberOfQuestions = 0
     @State private var inputAnswer = 0
     
     @State private var showingScore = false
@@ -18,6 +18,11 @@ struct ContentView: View {
     @State private var scoreBody = ""
     
     @State private var questions = 1
+    
+    var result: Int {
+        firstNumber * secondNumber
+    }
+    
     
     var body: some View {
         VStack {
@@ -27,9 +32,9 @@ struct ContentView: View {
             Spacer()
             
             Section("Times Tables Of") {
-                Picker("Times Table Of", selection: $timesOf) {
-                    ForEach(0..<13) {
-                        Text("\($0)")
+                Picker("Times Table Of", selection: $firstNumber) {
+                    ForEach(1..<13) {
+                        Text("\($0)").tag($0)
                     }
                 }
                 .pickerStyle(.palette)
@@ -39,7 +44,7 @@ struct ContentView: View {
             
             Section("How Many Questions?") {
                 Picker("How Many Questions", selection: $numberOfQuestions) {
-                    ForEach(1..<13) {
+                    ForEach(3..<13) {
                         Text("\($0) questions")
                     }
                 }
@@ -49,14 +54,7 @@ struct ContentView: View {
             Spacer()
             
             Section {
-                HStack {
-                    Image(systemName: "circle")
-                    Image(systemName: "multiply")
-                    Image(systemName: "circle")
-                    Image(systemName: "equal")
-                    Image(systemName: "circle")
-                }
-                .font(.largeTitle.bold())
+                EquationView(firstNumber: firstNumber, secondNumber: secondNumber, result: result)
             }
             
             Section {
